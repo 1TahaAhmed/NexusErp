@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Nexus.Erp.Domain/Nexus.Erp.Domain.csproj" />
+  <Project Path="NexusErp.Application/NexusErp.Application.csproj" />
+  <Project Path="NexusErp.Infrastructure/NexusErp.Infrastructure.csproj" />
+  <Project Path="NexusErp/NexusErp.API.csproj" />
+</Solution>

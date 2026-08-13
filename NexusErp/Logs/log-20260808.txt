@@ -1,0 +1,6 @@
+2026-08-08 18:49:09.769 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 64
+2026-08-08 18:49:14.996 +03:00 [INF] HTTP GET / responded 404 in 1502.3299 ms

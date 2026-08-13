@@ -1,0 +1,100 @@
+2026-08-10 00:16:04.663 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 65
+2026-08-10 00:16:09.269 +03:00 [INF] HTTP GET / responded 404 in 52.6128 ms
+2026-08-10 00:25:20.709 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 65
+2026-08-10 00:25:21.235 +03:00 [INF] HTTP GET / responded 404 in 79.5811 ms
+2026-08-10 00:26:34.640 +03:00 [ERR] HTTP POST /api/payments/webhooks/paymob responded 500 in 115.5168 ms
+System.InvalidOperationException: Unable to resolve service for type 'MediatR.IMediator' while attempting to activate 'NexusErp.Api.Controllers.PaymobWebhookController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method9(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-08-10 00:26:34.659 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MediatR.IMediator' while attempting to activate 'NexusErp.Api.Controllers.PaymobWebhookController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method9(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-08-10 00:28:12.494 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 00:28:12.980 +03:00 [INF] HTTP GET / responded 404 in 46.2525 ms
+2026-08-10 00:28:38.264 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 00:31:06.220 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 148012.3181 ms
+2026-08-10 00:31:32.819 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 5164.9920 ms
+2026-08-10 00:33:23.710 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 00:33:24.171 +03:00 [INF] HTTP GET / responded 404 in 44.8517 ms
+2026-08-10 00:33:42.828 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 00:33:42.907 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 113.7832 ms
+2026-08-10 00:34:32.094 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 00:34:32.554 +03:00 [INF] HTTP GET / responded 404 in 44.0045 ms
+2026-08-10 00:34:54.747 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 00:36:08.035 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 73323.9449 ms
+2026-08-10 00:36:26.351 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 00:36:26.779 +03:00 [INF] HTTP GET / responded 404 in 45.7326 ms
+2026-08-10 00:36:59.326 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 00:37:37.232 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 37947.5380 ms
+2026-08-10 01:24:43.442 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 01:24:43.928 +03:00 [INF] HTTP GET / responded 404 in 53.6510 ms
+2026-08-10 01:25:08.503 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 01:25:44.423 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 35952.6813 ms
+2026-08-10 01:26:22.623 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 01:26:23.057 +03:00 [INF] HTTP GET / responded 404 in 43.8244 ms
+2026-08-10 01:26:35.867 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 01:26:35.911 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 77.6295 ms
+2026-08-10 01:28:16.912 +03:00 [ERR] An error occurred while seeding roles and permissions.
+System.InvalidOperationException: No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole`1[System.Guid]]' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp\Program.cs:line 66
+2026-08-10 01:28:17.342 +03:00 [INF] HTTP GET / responded 404 in 44.2969 ms
+2026-08-10 01:28:30.542 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-10 01:28:30.588 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 200 in 80.2164 ms
