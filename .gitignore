@@ -6,3 +6,7 @@ obj/
 *.log
 *.user
 appsettings.Development.json
+# Ignore zip files
+*.zip
+*.rar
+*.7z
