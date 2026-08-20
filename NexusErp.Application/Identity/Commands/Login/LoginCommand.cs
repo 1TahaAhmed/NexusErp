@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NexusErp.Application.Common.Models;
 using NexusErp.Application.DTOs.Auth;
 using System;
 using System.Collections.Generic;
@@ -9,5 +10,5 @@ namespace NexusErp.Application.Identity.Commands.Login
     public record LoginCommand(
         string Email,
         string Password
-        ) : IRequest<AuthResponse>;
+        ) : IRequest<Result<AuthResponse>>;
 }

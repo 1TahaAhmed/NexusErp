@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Queries;
 
@@ -9,6 +11,7 @@ namespace NexusErp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = AppRoles.Admin)]
     public class SuppliersController : ControllerBase
     {
         private readonly ISender _mediator;

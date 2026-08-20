@@ -1,26 +1,29 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Queries;
-
+              
 namespace NexusErp.API.Controllers
-{
+{             
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = AppRoles.Admin)]
     public class BranchesController : ControllerBase
-    {
+    {          
         private readonly ISender _mediator;
-
+               
         public BranchesController(ISender mediator)
-        {
+        {      
             _mediator = mediator;
-        }
-
+        }      
+            
         [HttpPost]
         public async Task<IActionResult> CreateBranch([FromBody] CreateBranchCommand command)
-        {
+        {   
             var result = await _mediator.Send(command);
 
             if (!result.IsSuccess)

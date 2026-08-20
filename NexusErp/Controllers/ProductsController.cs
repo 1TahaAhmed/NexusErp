@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Queries;
 using NexusErp.Application.Procurement.Specifications;
@@ -20,6 +21,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = Permissions.Products.AddProduct)]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
     {
         var result = await _mediator.Send(command);
@@ -33,6 +35,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("by-barcode/{barcode}")]
+    [Authorize(Policy = Permissions.Products.View)]
     public async Task<IActionResult> GetByBarcode(string barcode)
     {
         var result = await _mediator.Send(new GetProductByBarcodeQuery(barcode));
@@ -45,6 +48,7 @@ public class ProductsController : ControllerBase
         return Ok(result);
     }
     [HttpGet]
+    [Authorize(Policy = Permissions.Products.View)]
     public async Task<IActionResult> GetProducts()
     {
         var result = await _mediator.Send(new GetProductsListQuery());
@@ -58,6 +62,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Policy = Permissions.Products.EditProduct)]
     public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] UpdateProductCommand command)
     {
         if (id != command.Id)
@@ -69,6 +74,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Policy = Permissions.Products.DeleteProduct)]
     public async Task<IActionResult> DeleteProduct(Guid id)
     {
         var result = await _mediator.Send(new DeleteProductCommand(id));

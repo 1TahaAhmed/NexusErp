@@ -19,9 +19,10 @@ namespace NexusErp.Infrastructure.Data
             : base(options)
         {
         }
+
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-        public new DbSet<User> Users => Set<User>();
-        public new DbSet<Role> Roles => Set<Role>();
+        //public new DbSet<User> Users => Set<User>();
+        //public new DbSet<Role> Roles => Set<Role>();
         public DbSet<Branch> Branches => Set<Branch>();
 
 
@@ -102,6 +103,17 @@ namespace NexusErp.Infrastructure.Data
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<ApplicationRole>(b =>
+            {
+                b.Property(r => r.Description).HasMaxLength(250);
+            });
+
+            modelBuilder.Entity<ApplicationUser>( b =>
+            {
+                b.Property(u => u.FirstName).HasMaxLength(100).IsRequired();
+                b.Property(u => u.LastName).HasMaxLength(100).IsRequired();
             });
 
             modelBuilder.Entity<Role>(b =>
@@ -581,7 +593,7 @@ namespace NexusErp.Infrastructure.Data
                 .WithMany()
                 .HasForeignKey(sii => sii.ProductBatchId)
                 .OnDelete(DeleteBehavior.Restrict);
-            });
+            }); 
         }
     }
 }

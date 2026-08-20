@@ -2,41 +2,45 @@
 using Microsoft.AspNetCore.Identity;
 using Nexus.Erp.Domain.Entities.Identity;
 using NexusErp.Application.Common.Interfaces;
+using NexusErp.Application.Common.Models;
 using NexusErp.Application.DTOs.Auth;
-using System;
-using System.Collections.Generic;
-using System.Formats.Tar;
-using System.Text;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NexusErp.Application.Identity.Commands.Login
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResponse>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<AuthResponse>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        public LoginCommandHandler(UserManager<ApplicationUser> userManager
-            , SignInManager<ApplicationUser> signInManager
-            , IJwtTokenGenerator jwtTokenGenerator)
+        public LoginCommandHandler(
+            UserManager<ApplicationUser> userManager,
+            IJwtTokenGenerator jwtTokenGenerator)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<AuthResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<Result<AuthResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
+
             if (user == null)
             {
-                throw new Exception("Invalid email or password.");
+                user = _userManager.Users.FirstOrDefault(u => u.Email == request.Email);
             }
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-            if (!result.Succeeded)
+            if (user == null || user.PasswordHash == null)
             {
-                throw new Exception("Invalid email or password.");
+                return Result.Failure<AuthResponse>(new Error("Auth.InvalidCredentials", "User does not exist or has no password set."));
+            }
+
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
+            if (!isPasswordValid)
+            {
+                return Result.Failure<AuthResponse>(new Error("Auth.InvalidCredentials", "Invalid password provided."));
             }
 
             var (token, refreshToken, expiration) = await _jwtTokenGenerator.GenerateTokensAsync(user);
@@ -45,7 +49,7 @@ namespace NexusErp.Application.Identity.Commands.Login
             var userClaims = await _userManager.GetClaimsAsync(user);
             var permissions = userClaims.Select(c => c.Value).ToList();
 
-            return new AuthResponse(
+            var authResponse = new AuthResponse(
                 user.Id.ToString(),
                 user.Email ?? string.Empty,
                 token,
@@ -54,6 +58,8 @@ namespace NexusErp.Application.Identity.Commands.Login
                 roles,
                 permissions
             );
+
+            return Result.Success(authResponse);
         }
     }
 }

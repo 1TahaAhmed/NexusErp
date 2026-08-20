@@ -1,9 +1,11 @@
 ﻿namespace NexusErp.Api.Controllers;
 
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nexus.Erp.Application.SalesReturns.Queries.GetSalesReturnById;
 using Nexus.Erp.Domain.Entities.Identity;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Sales.Commands;
 using NexusErp.Application.SalesReturns.Commands.CreateSalesReturn;
 using NexusErp.Application.SalesReturns.Queries.GetSalesReturnsList;
@@ -21,6 +23,7 @@ public class SalesReturnsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = Permissions.SalesReturns.CreateSalesReturns)]
     public async Task<IActionResult> CreateReturn([FromBody] CreateSalesReturnCommand command)
     {
         var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -40,6 +43,7 @@ public class SalesReturnsController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [Authorize(Policy = Permissions.SalesReturns.View)]
     public async Task<IActionResult> GetById(Guid id)
     {
         var result = await _mediator.Send(new GetSalesReturnByIdQuery(id));
@@ -53,6 +57,7 @@ public class SalesReturnsController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Policy = Permissions.SalesReturns.View)]
     public async Task<IActionResult> GetList([FromQuery] GetSalesReturnsListQuery query)
     {
         var result = await _mediator.Send(query);

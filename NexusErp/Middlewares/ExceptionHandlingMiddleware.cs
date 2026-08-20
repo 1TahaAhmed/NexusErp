@@ -5,10 +5,11 @@ using NexusErp.Application.Common;
 using Nexus.Erp.Domain.ExceptionHandling;
 using Nexus.Erp.Domain.ExeptionHandling;
 using NexusErp.Application.Common.Responses;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NexusErp.API.Middlewares;
 
-public  class ExceptionHandlingMiddleware
+public sealed class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
@@ -36,36 +37,37 @@ public  class ExceptionHandlingMiddleware
     {
         context.Response.ContentType = "application/json";
 
-        var response = exception switch
+
+        var (statusCode, body) = exception switch
         {
-            NotFoundException => new
-            {
-                StatusCode = HttpStatusCode.NotFound,
-                Body = ApiResponse<object>.Failure(exception.Message)
-            },
-            BadRequestException ex => new
-            {
-                StatusCode = HttpStatusCode.BadRequest,
-                Body = ApiResponse<object>.Failure(ex.Message)
-            },
-            ValidationException ex => new
-            {
-                StatusCode = HttpStatusCode.BadRequest,
-                Body = ApiResponse<object>.Failure(ex.Message, ex.Errors)
-            },
-            DbUpdateException => new
-            {
-                StatusCode = HttpStatusCode.Conflict,
-                Body = ApiResponse<object>.Failure("A database update error occurred.")
-            },
-            _ => new
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Body = ApiResponse<object>.Failure("An unexpected error occurred.")
-            }
+            NotFoundException => (
+                HttpStatusCode.NotFound,
+                ApiResponse<object>.Failure(exception.Message)
+            ),
+            BadRequestException ex => (
+                HttpStatusCode.BadRequest,
+                ApiResponse<object>.Failure(ex.Message)
+            ),
+            ValidationException ex => (
+                HttpStatusCode.BadRequest,
+                ApiResponse<object>.Failure(ex.Message, ex.Errors)
+            ),
+            DbUpdateException => (
+                HttpStatusCode.Conflict,
+                ApiResponse<object>.Failure("A database update error occurred.")
+            ),
+            _ => (
+                HttpStatusCode.InternalServerError,
+                ApiResponse<object>.Failure("An unexpected error occurred.")
+            )
         };
-        context.Response.StatusCode = (int)response.StatusCode;
-        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-        return context.Response.WriteAsync(JsonSerializer.Serialize(response.Body, jsonOptions));
+
+        context.Response.StatusCode = (int)statusCode;
+        var jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        };
+
+        return context.Response.WriteAsync(JsonSerializer.Serialize(body, jsonOptions));
     }
 }

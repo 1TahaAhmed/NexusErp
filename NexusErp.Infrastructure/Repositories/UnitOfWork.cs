@@ -2,9 +2,6 @@
 using Nexus.Erp.Domain.Common;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NexusErp.Infrastructure.Repositories
 {
@@ -79,11 +76,11 @@ namespace NexusErp.Infrastructure.Repositories
             try
             {
                 if (_currentTransaction != null)
-                    await _currentTransaction.RollbackAsync();
+                    await _currentTransaction.RollbackAsync();    
             }
             finally
             {
-                if( _currentTransaction != null)
+                if(_currentTransaction != null)
                 {
                     _currentTransaction.Dispose();
                     _currentTransaction= null;

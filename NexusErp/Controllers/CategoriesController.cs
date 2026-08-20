@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Queries;
 
@@ -18,6 +20,7 @@ namespace NexusErp.API.Controllers
             _mediator = mediator;            
         }
         [HttpPost]
+        [Authorize(Policy = Permissions.Categories.CreateCategory)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand command)
         {
             var result = await _mediator.Send(command);
@@ -31,6 +34,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = Permissions.Categories.View)]
         public async Task<IActionResult> GetCategories()
         {
             var result = await _mediator.Send(new GetCategoriesListQuery());
@@ -44,6 +48,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Policy = Permissions.Categories.View)]
         public async Task<IActionResult> GetCategoryById(Guid id)
         {
             var result = await _mediator.Send(new GetCategoryByIdQuery(id));
@@ -52,6 +57,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Policy = Permissions.Categories.EditCategory)]
         public async Task<IActionResult> UpdateCategory(Guid id, [FromBody] UpdateCategoryCommand command)
         {
             if (id != command.Id)
@@ -63,6 +69,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Policy = Permissions.Categories.DeleteCategory)]
         public async Task<IActionResult> DeleteCategory(Guid id)
         {
             var result = await _mediator.Send(new DeleteCategoryCommand(id));

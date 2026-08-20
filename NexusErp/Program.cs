@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Nexus.Erp.Domain.Entities.Identity;
+using NexusErp.API.SwaggerGenJWTauth;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.DependencyInjection;
@@ -28,7 +29,7 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
@@ -67,12 +68,17 @@ builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler
 
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+});
+
 builder.Services.AddPaymentServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenJwtAuth();
 
 builder.Services.AddMediatR(cfg =>
 {
@@ -85,19 +91,29 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
-    {
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
+    var configuration = services.GetRequiredService<IConfiguration>();
 
-        await RoleSeeder.SeedRolesAndPermissionsAsync(roleManager, userManager);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding roles and permissions.");
-    }
+    await RoleSeeder.SeedRolesAndPermissionsAsync(roleManager, userManager, configuration);
 }
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    try
+//    {
+//        var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
+//        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+//        await RoleSeeder.SeedRolesAndPermissionsAsync(roleManager, userManager);
+//    }
+//    catch (Exception ex)
+//    {
+//        var logger = services.GetRequiredService<ILogger<Program>>();
+//        logger.LogError(ex, "An error occurred while seeding roles and permissions.");
+//    }
+//}
 
 if (app.Environment.IsDevelopment())
 {

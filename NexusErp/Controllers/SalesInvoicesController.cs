@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Payments.Commands;
 using NexusErp.Application.Sales.Commands;
 using NexusErp.Application.Sales.Queries;
@@ -19,6 +21,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = Permissions.Sales.CreateInvoice)]
         public async Task<IActionResult> CreateSalesInvoices([FromBody] CreateSalesInvoiceCommand command)
         {
             var result = await _mediator.Send(command);
@@ -45,6 +48,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = Permissions.Sales.View)]
         public async Task<IActionResult> GetSalesInvoices()
         {
             var result = await _mediator.Send(new GetSalesInvoicesListQuery());
@@ -58,6 +62,7 @@ namespace NexusErp.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Policy = Permissions.Sales.View)]
         public async Task<IActionResult> GetSalesInvoiceById(Guid id)
         {
             var result = await _mediator.Send(new GetSalesInvoiceByIdQuery(id));

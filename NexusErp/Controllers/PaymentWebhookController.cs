@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NexusErp.Application.Common.Models.Payments;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Payments.Commands;
 using System.Security.Cryptography;
 using System.Text;
@@ -10,6 +12,7 @@ namespace NexusErp.Api.Controllers;
 
 [ApiController]
 [Route("api/payments/webhooks")]
+[AllowAnonymous]
 public class PaymobWebhookController : ControllerBase
 {
     private readonly IConfiguration _configuration;

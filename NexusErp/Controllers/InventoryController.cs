@@ -1,11 +1,14 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Procurement.Queries;
          
 namespace NexusErp.API.Controllers;
         
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = AppRoles.Admin)]
 public class InventoryController : ControllerBase
 {       
     private readonly ISender _mediator;

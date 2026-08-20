@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Nexus.Erp.Domain.Entities.Identity;
 using NexusErp.Application.Identity.Commands;
 using NexusErp.Application.Identity.Commands.Login;
 using NexusErp.Application.Identity.Commands.Registeration; // عدل الـ namespace حسب مكان الـ Auth Commands عندك
@@ -21,13 +23,10 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(result);
-    }
-
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterCommand command)
-    {
-        var result = await _mediator.Send(command);
+        if (!result.IsSuccess)
+        {
+            return BadRequest($"{result.Error}");
+        }
         return Ok(result);
     }
 }
