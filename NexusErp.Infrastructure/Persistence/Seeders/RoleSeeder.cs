@@ -27,18 +27,19 @@ namespace NexusErp.Infrastructure.Persistence.Seeders
             await SeedRolePermissionsAsync(roleManager);
 
             var adminSection = configuration.GetSection("InitialAdmin");
-            var adminEmail = adminSection["Email"] ?? "tahaahmed3428@gmail.com";
-            var adminPassword = adminSection["Password"] ?? "01034287863#Ta";
-
+            
+            var adminEmail = adminSection["Email"] ?? throw new InvalidOperationException("InitialAdmin:Email is missing in configuration.");
+            var adminPassword = adminSection["Password"] ?? throw new InvalidOperationException("InitialAdmin:Password is missing in configuration.");
+            
             var defaultAdmin = await userManager.FindByEmailAsync(adminEmail);
 
             if (defaultAdmin == null)
             {
                 defaultAdmin = new ApplicationUser
                 {
-                    FirstName = adminSection["FirstName"] ?? "Taha",
-                    LastName = adminSection["LastName"] ?? "Ahmed",
-                    UserName = adminSection["UserName"] ?? "TahaAhmed",
+                    FirstName = adminSection["FirstName"] ?? "Admin",
+                    LastName = adminSection["LastName"] ?? "System",
+                    UserName = adminSection["UserName"] ?? "admin",
                     Email = adminEmail,
                     EmailConfirmed = true
                 };
