@@ -9,6 +9,7 @@ using NexusErp.Application.DTOs.Auth;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RefreshTokenEntity = Nexus.Erp.Domain.Entities.Identity.RefreshToken;
 
 namespace NexusErp.Application.Identity.Commands.Registeration
 {
@@ -76,6 +77,14 @@ namespace NexusErp.Application.Identity.Commands.Registeration
 
             var (token, refreshToken, expiration) = await _jwtTokenGenerator.GenerateTokensAsync(user);
 
+            user.RefreshTokens.Add(new RefreshTokenEntity
+            {
+                Token = refreshToken,
+                ExpiresOn = DateTime.UtcNow.AddDays(7),
+                CreatedOn = DateTime.UtcNow,
+            });
+
+            await _userManager.UpdateAsync(user);
 
             var roles = (await _userManager.GetRolesAsync(user)).ToList();
 

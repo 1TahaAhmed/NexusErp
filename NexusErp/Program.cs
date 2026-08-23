@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Nexus.Erp.Domain.Entities.Identity;
+using NexusErp.API.Middlewares;
 using NexusErp.API.SwaggerGenJWTauth;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.Common.Permissions;
@@ -107,6 +108,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
