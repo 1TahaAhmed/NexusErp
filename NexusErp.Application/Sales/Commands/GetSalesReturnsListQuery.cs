@@ -18,5 +18,5 @@ namespace NexusErp.Application.SalesReturns.Queries.GetSalesReturnsList
         Guid? BranchId = null,
         DateTime? FromDate = null,
         DateTime? ToDate = null
-    ) : IRequest<Result<List<SalesReturnListDto>>>; // <--- خليه List عادية
+    ) : IRequest<Result<List<SalesReturnListDto>>>;
 }

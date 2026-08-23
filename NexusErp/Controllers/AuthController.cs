@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nexus.Erp.Domain.Entities.Identity;
 using NexusErp.Application.Identity.Commands;
 using NexusErp.Application.Identity.Commands.Login;
-using NexusErp.Application.Identity.Commands.Registeration; // عدل الـ namespace حسب مكان الـ Auth Commands عندك
+using NexusErp.Application.Identity.Commands.Registeration;
 
 namespace NexusErp.API.Controllers;
 

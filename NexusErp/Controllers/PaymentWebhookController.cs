@@ -62,8 +62,10 @@ public class PaymobWebhookController : ControllerBase
         using var hmac = new HMACSHA512(Encoding.UTF8.GetBytes(hmacSecret));
         var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(concatenatedData));
         var calculatedHmac = BitConverter.ToString(hash).Replace("-", "").ToLower();
+        var calculatedBytes = Encoding.UTF8.GetBytes(calculatedHmac);
+        var incomingBytes = Encoding.UTF8.GetBytes(callback.Hmac?.ToLower() ?? string.Empty);
 
-        if (calculatedHmac != callback.Hmac?.ToLower())
+        if (!CryptographicOperations.FixedTimeEquals(calculatedBytes, incomingBytes))
         {
             return BadRequest(new { message = "Invalid HMAC Signature" });
         }

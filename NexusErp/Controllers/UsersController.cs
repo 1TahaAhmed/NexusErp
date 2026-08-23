@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Identity.Commands.Registeration;
+using NexusErp.Application.Procurement.Queries;
 
 namespace NexusErp.API.Controllers
 {
@@ -28,6 +29,12 @@ namespace NexusErp.API.Controllers
                 return BadRequest(result.Error);
 
             return Ok(result.Value);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetAllUsersQuery());
+            return Ok(result);
         }
     }
 }

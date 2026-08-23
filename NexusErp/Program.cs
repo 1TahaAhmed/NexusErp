@@ -98,22 +98,6 @@ using (var scope = app.Services.CreateScope())
     await RoleSeeder.SeedRolesAndPermissionsAsync(roleManager, userManager, configuration);
 }
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-//    try
-//    {
-//        var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
-//        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-
-//        await RoleSeeder.SeedRolesAndPermissionsAsync(roleManager, userManager);
-//    }
-//    catch (Exception ex)
-//    {
-//        var logger = services.GetRequiredService<ILogger<Program>>();
-//        logger.LogError(ex, "An error occurred while seeding roles and permissions.");
-//    }
-//}
 
 if (app.Environment.IsDevelopment())
 {

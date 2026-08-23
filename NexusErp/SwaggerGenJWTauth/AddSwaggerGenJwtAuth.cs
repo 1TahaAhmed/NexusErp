@@ -21,7 +21,6 @@ namespace NexusErp.API.SwaggerGenJWTauth
                     }
                 });
 
-                // 1. Definition
                 var scheme = new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",

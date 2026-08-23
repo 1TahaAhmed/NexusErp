@@ -62,8 +62,6 @@ namespace NexusErp.Application.Identity.Commands.Registeration
                 return Result.Failure<AuthResponse>(new Error("Auth.RegistrationFailed", firstError));
             }
 
-            //const string defaultRole = AppRoles.Cashier;
-
             if(!await _roleManager.RoleExistsAsync(request.RoleName))
             {
                 return Result.Failure<AuthResponse>(new Error("Auth.InvalidRole", "Selected role does not exist."));
@@ -78,9 +76,6 @@ namespace NexusErp.Application.Identity.Commands.Registeration
 
             var (token, refreshToken, expiration) = await _jwtTokenGenerator.GenerateTokensAsync(user);
 
-            //var roles = (await _userManager.GetRolesAsync(user)).ToList();
-            //var userClaims = (await _userManager.GetClaimsAsync(user)).ToList();
-            //var permissions = userClaims.Select(c => c.Value).ToList();
 
             var roles = (await _userManager.GetRolesAsync(user)).ToList();
 

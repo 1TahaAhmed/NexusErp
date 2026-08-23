@@ -21,8 +21,6 @@ namespace NexusErp.Infrastructure.Data
         }
 
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-        //public new DbSet<User> Users => Set<User>();
-        //public new DbSet<Role> Roles => Set<Role>();
         public DbSet<Branch> Branches => Set<Branch>();
 
 

@@ -34,19 +34,6 @@ namespace NexusErp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("process-payment-success")]
-        public async Task<IActionResult> ProcessPaymentSuccess([FromBody] ProcessPaymentSuccessCommand command)
-        {
-            var result = await _mediator.Send(command);
-
-            if (!result)
-            {
-                return BadRequest(new { Error = "PaymentProcessingFailed", Message = "Failed to process payment." });
-            }
-
-            return Ok(new { Message = "Payment updated successfully." });
-        }
-
         [HttpGet]
         [Authorize(Policy = Permissions.Sales.View)]
         public async Task<IActionResult> GetSalesInvoices()

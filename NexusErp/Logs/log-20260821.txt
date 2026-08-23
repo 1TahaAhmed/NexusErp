@@ -1,0 +1,39 @@
+2026-08-21 00:10:28.158 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-21 00:10:29.557 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-21 00:10:29.623 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-21 00:10:29.642 +03:00 [INF] Hosting environment: Development
+2026-08-21 00:10:29.642 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-21 00:11:14.809 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-21 00:11:14.868 +03:00 [INF] HTTP POST /api/Branches responded 401 in 59.5613 ms
+2026-08-21 00:11:59.907 +03:00 [INF] HTTP POST /api/Categories responded 401 in 6.4081 ms
+2026-08-21 00:17:11.855 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-21 00:17:13.243 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-21 00:17:13.335 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-21 00:17:13.336 +03:00 [INF] Hosting environment: Development
+2026-08-21 00:17:13.338 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-21 00:33:11.843 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-21 00:33:13.239 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-21 00:33:13.309 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-21 00:33:13.310 +03:00 [INF] Hosting environment: Development
+2026-08-21 00:33:13.311 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-21 00:33:21.145 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-21 00:33:21.225 +03:00 [INF] HTTP GET /api/Users responded 401 in 81.3168 ms
+2026-08-21 00:33:57.691 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-21 00:33:57.975 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 318.7495 ms
+2026-08-21 00:34:22.247 +03:00 [INF] HTTP GET /api/Users responded 200 in 150.0731 ms
+2026-08-21 00:35:09.549 +03:00 [INF] HTTP POST /api/Categories responded 403 in 21.3490 ms
+2026-08-21 00:45:15.932 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-21 00:45:17.282 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-21 00:45:17.351 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-21 00:45:17.352 +03:00 [INF] Hosting environment: Development
+2026-08-21 00:45:17.353 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-21 00:45:58.292 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-21 00:45:59.958 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-21 00:46:01.011 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 2720.7821 ms
+2026-08-21 00:46:21.853 +03:00 [INF] HTTP GET /api/Users responded 200 in 223.4893 ms
+2026-08-21 00:47:39.718 +03:00 [INF] HTTP POST /api/Users responded 400 in 113.5703 ms
+2026-08-21 00:47:49.050 +03:00 [INF] HTTP POST /api/Users responded 200 in 545.8610 ms
+2026-08-21 00:48:00.492 +03:00 [INF] HTTP GET /api/Users responded 200 in 20.9186 ms
+2026-08-21 00:48:49.680 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 63.1921 ms
+2026-08-21 00:49:25.679 +03:00 [INF] HTTP POST /api/Branches responded 200 in 182.7767 ms
+2026-08-21 00:50:08.758 +03:00 [INF] HTTP POST /api/Branches responded 403 in 2.5880 ms
