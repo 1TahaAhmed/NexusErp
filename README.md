@@ -1,6 +1,6 @@
 # 🚀 NexusErp - Enterprise Resource Planning System
 
-![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet)
+![.NET 10](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet)
 ![C#](https://img.shields.io/badge/C%23-12.0-239120?style=for-the-badge&logo=c-sharp)
 ![Architecture](https://img.shields.io/badge/Architecture-Clean%20%26%20Decoupled-blue?style=for-the-badge)
 ![Pattern](https://img.shields.io/badge/Design%20Pattern-CQRS%20%2B%20MediatR-orange?style=for-the-badge)
