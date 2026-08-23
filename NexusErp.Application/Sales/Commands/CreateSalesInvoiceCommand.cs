@@ -23,8 +23,8 @@ namespace NexusErp.Application.Sales.Commands
         Guid BranchId,
         Guid CreateByUserId,
         string? CustomerEmail,
-        List<SalesInvoiceItemInputDto> Items,
-        List<PaymentTransactionInputDto> Payments,
+        IReadOnlyList<SalesInvoiceItemInputDto> Items,
+        IReadOnlyList<PaymentTransactionInputDto> Payments,
         decimal DiscountAmount = 0
         ) : IRequest<Result<Guid>>;
 }

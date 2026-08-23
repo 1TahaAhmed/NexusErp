@@ -27,10 +27,10 @@ namespace NexusErp.Infrastructure.Persistence.Seeders
             await SeedRolePermissionsAsync(roleManager);
 
             var adminSection = configuration.GetSection("InitialAdmin");
-            
+
             var adminEmail = adminSection["Email"] ?? throw new InvalidOperationException("InitialAdmin:Email is missing in configuration.");
             var adminPassword = adminSection["Password"] ?? throw new InvalidOperationException("InitialAdmin:Password is missing in configuration.");
-            
+
             var defaultAdmin = await userManager.FindByEmailAsync(adminEmail);
 
             if (defaultAdmin == null)
@@ -61,6 +61,7 @@ namespace NexusErp.Infrastructure.Persistence.Seeders
 
         private static async Task SeedRolePermissionsAsync(RoleManager<ApplicationRole> roleManager)
         {
+            // 1. Cashier Permissions
             var cashierRole = await roleManager.FindByNameAsync(AppRoles.Cashier);
             if (cashierRole != null)
             {
@@ -77,6 +78,50 @@ namespace NexusErp.Infrastructure.Persistence.Seeders
                     if (!existingClaims.Any(c => c.Type == "Permission" && c.Value == permission))
                     {
                         await roleManager.AddClaimAsync(cashierRole, new Claim("Permission", permission));
+                    }
+                }
+            }
+
+            // 2. Inventory Manager Permissions
+            var inventoryRole = await roleManager.FindByNameAsync(AppRoles.InventoryManager);
+            if (inventoryRole != null)
+            {
+                var inventoryPermissions = new[]
+                {
+                    Permissions.Products.View,
+                    Permissions.Products.AddProduct,
+                    Permissions.Products.EditProduct,
+                    Permissions.PurchaseOrders.View,
+                    Permissions.PurchaseOrders.CreatePurchaseOrder
+                };
+
+                var existingClaims = await roleManager.GetClaimsAsync(inventoryRole);
+                foreach (var permission in inventoryPermissions)
+                {
+                    if (!existingClaims.Any(c => c.Type == "Permission" && c.Value == permission))
+                    {
+                        await roleManager.AddClaimAsync(inventoryRole, new Claim("Permission", permission));
+                    }
+                }
+            }
+
+            // 3. Accountant Permissions
+            var accountantRole = await roleManager.FindByNameAsync(AppRoles.Accountant);
+            if (accountantRole != null)
+            {
+                var accountantPermissions = new[]
+                {
+                    Permissions.Sales.View,
+                    Permissions.PurchaseOrders.View,
+                    Permissions.SalesReturns.View
+                };
+
+                var existingClaims = await roleManager.GetClaimsAsync(accountantRole);
+                foreach (var permission in accountantPermissions)
+                {
+                    if (!existingClaims.Any(c => c.Type == "Permission" && c.Value == permission))
+                    {
+                        await roleManager.AddClaimAsync(accountantRole, new Claim("Permission", permission));
                     }
                 }
             }

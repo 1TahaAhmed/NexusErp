@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using NexusErp.Application.Common;
+using Microsoft.Extensions.Logging;
 using Nexus.Erp.Domain.ExceptionHandling;
 using Nexus.Erp.Domain.ExeptionHandling;
+using NexusErp.Application.Common;
 using NexusErp.Application.Common.Responses;
-using Microsoft.AspNetCore.Mvc;
 
 namespace NexusErp.API.Middlewares;
 
@@ -37,9 +38,21 @@ public sealed class ExceptionHandlingMiddleware
     {
         context.Response.ContentType = "application/json";
 
-
         var (statusCode, body) = exception switch
         {
+            FluentValidation.ValidationException fluentEx => (
+                HttpStatusCode.BadRequest,
+                ApiResponse<object>.Failure(
+                    "One or more validation errors occurred.",
+                    fluentEx.Errors
+                        .GroupBy(e => e.PropertyName)
+                        .ToDictionary(
+                            g => g.Key,
+                            g => string.Join(", ", g.Select(e => e.ErrorMessage))
+                        )
+                )
+            ),
+
             NotFoundException => (
                 HttpStatusCode.NotFound,
                 ApiResponse<object>.Failure(exception.Message)
@@ -52,10 +65,12 @@ public sealed class ExceptionHandlingMiddleware
                 HttpStatusCode.BadRequest,
                 ApiResponse<object>.Failure(ex.Message, ex.Errors)
             ),
+
             DbUpdateException => (
                 HttpStatusCode.Conflict,
                 ApiResponse<object>.Failure("A database update error occurred.")
             ),
+
             _ => (
                 HttpStatusCode.InternalServerError,
                 ApiResponse<object>.Failure("An unexpected error occurred.")

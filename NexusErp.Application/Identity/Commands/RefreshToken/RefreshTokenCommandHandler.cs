@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Nexus.Erp.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
+using Nexus.Erp.Domain.Entities.Identity;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.DTOs.Auth;
+using RefreshTokenEntity = Nexus.Erp.Domain.Entities.Identity.RefreshToken;
 
 namespace NexusErp.Application.Identity.Commands.RefreshToken;
 
@@ -39,9 +40,18 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, A
         }
 
         existingRefreshToken.RevokedOn = DateTime.UtcNow;
-        await _userManager.UpdateAsync(user);
 
         var (newToken, newRefreshToken, expiration) = await _jwtTokenGenerator.GenerateTokensAsync(user);
+
+        // إضافة الـ RefreshToken الجديد (مش الـ JWT access token)
+        user.RefreshTokens.Add(new RefreshTokenEntity
+        {
+            Token = newRefreshToken,
+            ExpiresOn = DateTime.UtcNow.AddDays(7),
+            CreatedOn = DateTime.UtcNow,
+        });
+
+        await _userManager.UpdateAsync(user);
 
         var roles = (await _userManager.GetRolesAsync(user)).ToList();
         var userClaims = await _userManager.GetClaimsAsync(user);
