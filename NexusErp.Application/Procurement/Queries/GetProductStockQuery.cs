@@ -9,5 +9,5 @@ namespace NexusErp.Application.Procurement.Queries
     public record GetProductStockQuery(
         Guid BranchId,
         Guid ProductId
-        ) : IRequest<Result<int>>;
+        ) : IRequest<Result<decimal>>;
 }

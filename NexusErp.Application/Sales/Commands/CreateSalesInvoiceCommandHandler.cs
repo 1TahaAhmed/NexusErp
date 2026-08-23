@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Nexus.Erp.Domain.Entities.Catalog;
 using Nexus.Erp.Domain.Entities.Inventory;
 using Nexus.Erp.Domain.Entities.Sales;
 using Nexus.Erp.Domain.Enums;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Common.Specifications;
 using NexusErp.Application.Inventory;
 using NexusErp.Application.Procurement.Specifications;
 
@@ -14,6 +16,7 @@ public class CreateSalesInvoiceCommandHandler : IRequestHandler<CreateSalesInvoi
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPaymentGatewayService _paymentGatewayService;
+
     public CreateSalesInvoiceCommandHandler(IUnitOfWork unitOfWork, IPaymentGatewayService paymentGatewayService)
     {
         _unitOfWork = unitOfWork;
@@ -35,7 +38,8 @@ public class CreateSalesInvoiceCommandHandler : IRequestHandler<CreateSalesInvoi
         var batchRepo = _unitOfWork.Repository<ProductBatch>();
         var stockRepo = _unitOfWork.Repository<BranchStock>();
         var invoiceRepo = _unitOfWork.Repository<SalesInvoice>();
- 
+        var productRepo = _unitOfWork.Repository<Product>();
+
         var invoice = new SalesInvoice
         {
             BranchId = request.BranchId,
@@ -51,6 +55,15 @@ public class CreateSalesInvoiceCommandHandler : IRequestHandler<CreateSalesInvoi
 
         foreach (var item in request.Items)
         {
+            var productSpec = new BaseSpecification<Product>(p => p.Id == item.ProductId);
+            var product = await productRepo.GetEntityWithSpecAsync(productSpec);
+            if (product == null)
+            {
+                return Result.Failure<Guid>(new Error("SalesInvoice.ProductNotFound", $"Product with ID {item.ProductId} was not found."));
+            }
+
+            var actualUnitPrice = product.SellingPrice;
+
             var stockSpec = new BranchStockByBranchAndProductSpecification(request.BranchId, item.ProductId);
             var branchStock = await stockRepo.GetEntityWithSpecAsync(stockSpec);
 
@@ -78,11 +91,11 @@ public class CreateSalesInvoiceCommandHandler : IRequestHandler<CreateSalesInvoi
                     ProductId = item.ProductId,
                     ProductBatchId = batch.Id,
                     Quantity = qtyDeductedFromBatch,
-                    UnitPrice = item.UnitPrice,
+                    UnitPrice = actualUnitPrice,
                 };
 
                 invoice.SalesInvoiceItems.Add(invoiceItem);
-                calculatedTotalAmount += qtyDeductedFromBatch * item.UnitPrice;
+                calculatedTotalAmount += qtyDeductedFromBatch * actualUnitPrice;
 
                 remainingQtyToDeduct -= qtyDeductedFromBatch;
             }
@@ -125,7 +138,7 @@ public class CreateSalesInvoiceCommandHandler : IRequestHandler<CreateSalesInvoi
                 TransactionDate = DateTime.UtcNow
             });
         }
-        
+
         try
         {
             await invoiceRepo.AddItem(invoice);

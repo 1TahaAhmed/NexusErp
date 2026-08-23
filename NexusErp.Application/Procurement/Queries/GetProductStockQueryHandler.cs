@@ -6,7 +6,7 @@ using NexusErp.Application.Common.Specifications;
 
 namespace NexusErp.Application.Procurement.Queries
 {
-    public class GetProductStockQueryHandler : IRequestHandler<GetProductStockQuery, Result<int>>
+    public class GetProductStockQueryHandler : IRequestHandler<GetProductStockQuery, Result<decimal>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -15,7 +15,7 @@ namespace NexusErp.Application.Procurement.Queries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<int>> Handle(GetProductStockQuery request, CancellationToken cancellationToken)
+        public async Task<Result<decimal>> Handle(GetProductStockQuery request, CancellationToken cancellationToken)
         {
             var stockRepo = _unitOfWork.Repository<BranchStock>();
 
@@ -26,10 +26,10 @@ namespace NexusErp.Application.Procurement.Queries
 
             if (stock is null)
             {
-                return Result.Success(0);
+                return Result.Success(0m);
             }
 
-            return Result.Success((int)stock.QuantityOnHand);
+            return Result.Success(stock.QuantityOnHand);
         }
     }
 }

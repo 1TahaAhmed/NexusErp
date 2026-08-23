@@ -9,8 +9,7 @@ namespace NexusErp.Application.Sales.Commands
 {
     public record SalesInvoiceItemInputDto(
         Guid ProductId,
-        decimal Quantity,
-        decimal UnitPrice
+        decimal Quantity
         );
 
     public record PaymentTransactionInputDto(
