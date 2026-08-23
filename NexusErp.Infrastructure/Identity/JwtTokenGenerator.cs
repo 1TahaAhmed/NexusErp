@@ -14,11 +14,13 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly IConfiguration _configuration;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly RoleManager<ApplicationRole> _roleManager;
 
-    public JwtTokenGenerator(IConfiguration configuration, UserManager<ApplicationUser> userManager)
+    public JwtTokenGenerator(RoleManager<ApplicationRole> roleManager, IConfiguration configuration, UserManager<ApplicationUser> userManager)
     {
         _configuration = configuration;
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     public async Task<(string Token, string RefreshToken, DateTime Expiration)> GenerateTokensAsync(ApplicationUser user)
@@ -34,9 +36,17 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         };
 
         claims.AddRange(userClaims);
+
         foreach (var role in roles)
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
+
+            var roleEntity = await _roleManager.FindByNameAsync(role);
+            if (roleEntity != null)
+            {
+                var roleClaims = await _roleManager.GetClaimsAsync(roleEntity);
+                claims.AddRange(roleClaims);
+            }
         }
 
         var jwtSettings = _configuration.GetSection("JwtSettings");

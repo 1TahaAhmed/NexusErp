@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NexusErp.Application.Common.Permissions
 {
@@ -16,14 +15,20 @@ namespace NexusErp.Application.Common.Permissions
             AuthorizationHandlerContext context,
             PermissionRequirement requirement)
         {
+            if (context.User.IsInRole(AppRoles.Admin))
+            {
+                context.Succeed(requirement);
+                return Task.CompletedTask;
+            }
+
             var permissions = context.User.Claims
                 .Where(x => x.Type == "Permission" && x.Value == requirement.Permission);
-
 
             if (permissions.Any())
             {
                 context.Succeed(requirement);
             }
+
             return Task.CompletedTask;
         }
     }
