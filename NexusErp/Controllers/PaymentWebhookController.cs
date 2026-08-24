@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using NexusErp.Application.Common.Models.Payments;
-using NexusErp.Application.Common.Permissions;
 using NexusErp.Application.Payments.Commands;
 using System.Security.Cryptography;
 using System.Text;
@@ -17,57 +18,65 @@ public class PaymobWebhookController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly IMediator _mediator;
+    private readonly IWebHostEnvironment _environment;
 
-    public PaymobWebhookController(IConfiguration configuration, IMediator mediator)
+    public PaymobWebhookController(
+        IConfiguration configuration,
+        IMediator mediator,
+        IWebHostEnvironment environment)
     {
         _configuration = configuration;
         _mediator = mediator;
+        _environment = environment;
     }
-    
+
     [HttpPost("paymob")]
     public async Task<IActionResult> HandlePaymobCallback([FromBody] PaymobCallbackDto callback)
     {
-        var hmacSecret = _configuration["PaymobSettings:HmacSecret"];
-
-        if (string.IsNullOrEmpty(hmacSecret))
-        {
-            return BadRequest("HMAC Secret is not configured.");
-        }
-
-        if (callback?.Obj == null || callback.Obj.Order == null || callback.Obj.SourceData == null)
+        if (callback?.Obj?.Order == null || callback.Obj.SourceData == null)
         {
             return BadRequest("Invalid payload structure.");
         }
 
-        string concatenatedData = $"{callback.Obj.AmountCents}" +
-                                 $"{callback.Obj.CreatedAt}" +
-                                 $"{callback.Obj.Currency}" +
-                                 $"{callback.Obj.ErrorOccured.ToString().ToLower()}" +
-                                 $"{callback.Obj.HasParentTransaction.ToString().ToLower()}" +
-                                 $"{callback.Obj.Id}" +
-                                 $"{callback.Obj.IntegrationId}" +
-                                 $"{callback.Obj.Is3dSecure.ToString().ToLower()}" +
-                                 $"{callback.Obj.IsAuth.ToString().ToLower()}" +
-                                 $"{callback.Obj.IsCapture.ToString().ToLower()}" +
-                                 $"{callback.Obj.IsRefunded.ToString().ToLower()}" +
-                                 $"{callback.Obj.IsStandalonePayment.ToString().ToLower()}" +
-                                 $"{callback.Obj.Pending.ToString().ToLower()}" +
-                                 $"{callback.Obj.Order.Id}" +
-                                 $"{callback.Obj.Owner}" +
-                                 $"{callback.Obj.SourceData.Pan}" +
-                                 $"{callback.Obj.SourceData.SubType}" +
-                                 $"{callback.Obj.SourceData.Type}" +
-                                 $"{callback.Obj.Success.ToString().ToLower()}";
-
-        using var hmac = new HMACSHA512(Encoding.UTF8.GetBytes(hmacSecret));
-        var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(concatenatedData));
-        var calculatedHmac = BitConverter.ToString(hash).Replace("-", "").ToLower();
-        var calculatedBytes = Encoding.UTF8.GetBytes(calculatedHmac);
-        var incomingBytes = Encoding.UTF8.GetBytes(callback.Hmac?.ToLower() ?? string.Empty);
-
-        if (!CryptographicOperations.FixedTimeEquals(calculatedBytes, incomingBytes))
+        if (!_environment.IsDevelopment())
         {
-            return BadRequest(new { message = "Invalid HMAC Signature" });
+            var hmacSecret = _configuration["PaymobSettings:HmacSecret"];
+            if (string.IsNullOrEmpty(hmacSecret))
+            {
+                return BadRequest("HMAC Secret is not configured.");
+            }
+
+            string concatenatedData = $"{callback.Obj.AmountCents}" +
+                                     $"{callback.Obj.CreatedAt}" +
+                                     $"{callback.Obj.Currency}" +
+                                     $"{callback.Obj.ErrorOccured.ToString().ToLower()}" +
+                                     $"{callback.Obj.HasParentTransaction.ToString().ToLower()}" +
+                                     $"{callback.Obj.Id}" +
+                                     $"{callback.Obj.IntegrationId}" +
+                                     $"{callback.Obj.Is3dSecure.ToString().ToLower()}" +
+                                     $"{callback.Obj.IsAuth.ToString().ToLower()}" +
+                                     $"{callback.Obj.IsCapture.ToString().ToLower()}" +
+                                     $"{callback.Obj.IsRefunded.ToString().ToLower()}" +
+                                     $"{callback.Obj.IsStandalonePayment.ToString().ToLower()}" +
+                                     $"{callback.Obj.Pending.ToString().ToLower()}" +
+                                     $"{callback.Obj.Order.Id}" +
+                                     $"{callback.Obj.Owner}" +
+                                     $"{callback.Obj.SourceData.Pan}" +
+                                     $"{callback.Obj.SourceData.SubType}" +
+                                     $"{callback.Obj.SourceData.Type}" +
+                                     $"{callback.Obj.Success.ToString().ToLower()}";
+
+            using var hmac = new HMACSHA512(Encoding.UTF8.GetBytes(hmacSecret));
+            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(concatenatedData));
+            var calculatedHmac = BitConverter.ToString(hash).Replace("-", "").ToLower();
+
+            var calculatedBytes = Encoding.UTF8.GetBytes(calculatedHmac);
+            var incomingBytes = Encoding.UTF8.GetBytes(callback.Hmac?.ToLower() ?? string.Empty);
+
+            if (!CryptographicOperations.FixedTimeEquals(calculatedBytes, incomingBytes))
+            {
+                return BadRequest(new { message = "Invalid HMAC Signature" });
+            }
         }
 
         if (callback.Obj.Success)

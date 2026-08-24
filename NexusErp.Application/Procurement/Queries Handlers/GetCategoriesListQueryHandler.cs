@@ -33,7 +33,7 @@ namespace NexusErp.Application.Procurement.Queries
                 c.ParentCategoryId
             )).ToList();
 
-            return Result<IReadOnlyList<CategoryDto>>.Success(dtos);
+            return Result.Success(dtos);
         }
     }
 }

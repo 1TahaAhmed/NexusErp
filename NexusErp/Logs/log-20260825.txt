@@ -1,0 +1,50 @@
+2026-08-25 00:09:04.751 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-25 00:09:10.905 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-25 00:09:11.160 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-25 00:09:11.161 +03:00 [INF] Hosting environment: Development
+2026-08-25 00:09:11.162 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-25 00:10:01.163 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-25 00:10:02.271 +03:00 [INF] HTTP GET /api/Users responded 401 in 1109.7227 ms
+2026-08-25 00:10:57.269 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-25 00:10:57.569 +03:00 [INF] HTTP POST /api/Auth/login responded 400 in 369.7040 ms
+2026-08-25 00:11:59.621 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 878.5187 ms
+2026-08-25 00:12:30.661 +03:00 [INF] HTTP GET /api/Branches responded 200 in 178.3080 ms
+2026-08-25 00:12:48.712 +03:00 [INF] HTTP GET /api/Branches/0ba2f9c8-73e7-49a3-b2bb-d1aba7342625 responded 200 in 26.8736 ms
+2026-08-25 00:13:00.923 +03:00 [INF] HTTP GET /api/Categories responded 200 in 53.6924 ms
+2026-08-25 00:20:35.465 +03:00 [INF] HTTP GET /api/PurchaseOrders responded 200 in 318.8341 ms
+2026-08-25 00:20:47.989 +03:00 [INF] HTTP GET /api/SalesInvoices responded 200 in 38.5060 ms
+2026-08-25 00:21:22.901 +03:00 [INF] HTTP GET /api/SalesReturns responded 200 in 133.8310 ms
+2026-08-25 00:21:35.117 +03:00 [INF] HTTP GET /api/SalesReturns responded 200 in 37.1757 ms
+2026-08-25 00:21:35.292 +03:00 [INF] HTTP GET /api/SalesReturns responded 200 in 4.3524 ms
+2026-08-25 00:21:56.999 +03:00 [INF] HTTP GET /api/Users responded 200 in 135.1961 ms
+2026-08-25 00:29:06.939 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-25 00:29:08.790 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-25 00:29:08.882 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-25 00:29:08.883 +03:00 [INF] Hosting environment: Development
+2026-08-25 00:29:08.884 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-25 00:43:09.953 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-25 00:43:12.167 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-25 00:43:12.257 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-25 00:43:12.258 +03:00 [INF] Hosting environment: Development
+2026-08-25 00:43:12.258 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-25 00:43:48.572 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-25 00:43:48.686 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-25 00:43:49.407 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 829.6719 ms
+2026-08-25 00:46:08.071 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 104.2525 ms
+2026-08-25 00:53:35.630 +03:00 [INF] HTTP POST /api/SalesInvoices responded 400 in 961.1000 ms
+2026-08-25 00:54:09.414 +03:00 [INF] HTTP GET /api/Products responded 200 in 130.9901 ms
+2026-08-25 00:54:51.892 +03:00 [INF] HTTP GET /api/Branches responded 200 in 102.9257 ms
+2026-08-25 00:55:22.091 +03:00 [INF] HTTP POST /api/SalesInvoices responded 200 in 656.1798 ms
+2026-08-25 00:55:55.777 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 0.9580 ms
+2026-08-25 01:04:52.311 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 0.8485 ms
+2026-08-25 01:05:01.816 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 400 in 0.6212 ms
+2026-08-25 01:18:34.116 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-25 01:18:35.567 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-25 01:18:35.662 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-25 01:18:35.663 +03:00 [INF] Hosting environment: Development
+2026-08-25 01:18:35.664 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-25 01:19:14.774 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-25 01:19:14.890 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-25 01:19:15.447 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 674.4909 ms
+2026-08-25 01:19:40.097 +03:00 [INF] HTTP GET /api/SalesInvoices responded 200 in 103.2498 ms
+2026-08-25 01:20:54.287 +03:00 [INF] HTTP POST /api/payments/webhooks/paymob responded 200 in 140.9556 ms
