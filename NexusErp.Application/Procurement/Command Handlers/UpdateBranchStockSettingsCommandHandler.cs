@@ -2,12 +2,13 @@
 using Nexus.Erp.Domain.Entities.Inventory;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NexusErp.Application.Procurement.Commands
+namespace NexusErp.Application.Procurement.Handlers
 {
     public class UpdateBranchStockSettingsCommandHandler : IRequestHandler<UpdateBranchStockSettingsCommand, Result<Guid>>
     {

@@ -15,8 +15,8 @@ namespace NexusErp.API.SwaggerGenJWTauth
                     Description = "Testing my Api",
                     Contact = new OpenApiContact()
                     {
-                        Name = "Taha Ahmed",
-                        Email = "tahaahmed@gmail.com",
+                        Name = "Admin",
+                        Email = "Admin@test.com",
                         Url = new Uri("https://mydomain.com")
                     }
                 });

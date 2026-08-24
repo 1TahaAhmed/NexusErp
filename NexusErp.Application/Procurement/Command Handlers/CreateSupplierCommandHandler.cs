@@ -5,7 +5,7 @@ using NexusErp.Application.Common.Models;
 using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Specifications;
 
-namespace Nexus.Erp.Application.Procurement.Commands.CreateSupplier;
+namespace NexusErp.Application.Procurement.Handlers;
 
 public class CreateSupplierCommandHandler : IRequestHandler<CreateSupplierCommand, Result<Guid>>
 {

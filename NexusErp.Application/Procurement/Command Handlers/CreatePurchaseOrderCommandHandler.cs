@@ -3,8 +3,9 @@ using Nexus.Erp.Domain.Entities.Procurement;
 using Nexus.Erp.Domain.Enums;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Procurement.Commands;
 
-namespace NexusErp.Application.Procurement.Commands
+namespace NexusErp.Application.Procurement.Handlers
 {
     public class CreatePurchaseOrderCommandHandler : IRequestHandler<CreatePurchaseOrderCommand, Result<Guid>>
     {

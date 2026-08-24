@@ -6,9 +6,10 @@ using Nexus.Erp.Domain.Enums;
 using NexusErp.Application.Catalog.Specifications;
 using NexusErp.Application.Common.Interfaces;
 using NexusErp.Application.Common.Models;
+using NexusErp.Application.Procurement.Commands;
 using NexusErp.Application.Procurement.Specifications;
 
-namespace NexusErp.Application.Procurement.Commands;
+namespace NexusErp.Application.Procurement.Handlers;
 
 public class ReceiveGoodsCommandHandler : IRequestHandler<ReceiveGoodsCommand, Result<Guid>>
 {

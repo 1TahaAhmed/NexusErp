@@ -12,3 +12,22 @@
 2026-08-23 18:48:52.683 +03:00 [INF] HTTP POST /api/Users responded 200 in 316.2389 ms
 2026-08-23 18:49:24.070 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 57.6690 ms
 2026-08-23 18:50:20.728 +03:00 [INF] HTTP POST /api/Suppliers responded 403 in 16.8957 ms
+2026-08-23 20:55:23.593 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-23 20:55:26.167 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-23 20:55:26.229 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 20:55:26.230 +03:00 [INF] Hosting environment: Development
+2026-08-23 20:55:26.230 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-23 20:59:04.866 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-23 20:59:06.618 +03:00 [INF] HTTP POST / responded 404 in 1752.8842 ms
+2026-08-23 20:59:12.793 +03:00 [INF] HTTP POST / responded 404 in 0.5608 ms
+2026-08-23 21:01:17.312 +03:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'NexusErp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-23 21:01:18.971 +03:00 [INF] Now listening on: http://localhost:5133
+2026-08-23 21:01:19.058 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 21:01:19.059 +03:00 [INF] Hosting environment: Development
+2026-08-23 21:01:19.060 +03:00 [INF] Content root path: C:\Users\Doctor_PC\source\repos\C#Fundamentals\ADO.NET\ADOD2\NexusErp\NexusErp
+2026-08-23 21:01:25.175 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-08-23 21:01:25.259 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-23 21:01:25.521 +03:00 [INF] HTTP POST /api/auth/login responded 400 in 346.5216 ms
+2026-08-23 21:03:21.431 +03:00 [INF] HTTP POST /api/auth/login responded 200 in 818.8318 ms
+2026-08-23 21:05:15.199 +03:00 [INF] HTTP POST /api/SalesInvoices responded 401 in 36.4112 ms
+2026-08-23 23:29:00.541 +03:00 [INF] HTTP GET /api/SalesInvoices responded 401 in 1.2968 ms
